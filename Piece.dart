@@ -1,6 +1,6 @@
 import 'dart:io';
 
-class Piece
+abstract class Piece
 {
     String type;
     Point position;
