@@ -1,11 +1,11 @@
 import 'dart:io';
 
-class Points
+class Point
 {
     int x;
     int y;
 
-    Points(int xPoint,int yPoint)
+    Point(int xPoint,int yPoint)
     {
         x=xPoint;
         y=yPoint;

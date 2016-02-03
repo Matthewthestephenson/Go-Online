@@ -16,7 +16,7 @@ abstract class Board
 
     }
 
-    void placePiece (Points pt, Piece newPiece)
+    void placePiece (Point pt, Piece newPiece)
     {
 
     }
