@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'Point.dart';
 import 'TestPiece.dart';
-import 'Piece.dart';
 
 void main () {
     Board b = new Board(4);
@@ -17,13 +16,13 @@ void main () {
 
 class Board
 {
-    Map pieces;
+    List pieces;
     int dimension;
     // Need to make data storage for board - Make 2D array? or map? or List?, linked hash map?
 
     Board (int dimension)
     {
-        pieces = new Map<Point,Piece>();
+        pieces = new List<Piece>(dimension*dimension);
         this.dimension = dimension;
         //TODO
     }
@@ -33,17 +32,24 @@ class Board
     {
         //TODO
         Board r = new Board(dimension);
-        r.pieces = new Map.from(pieces);
+        r.pieces = new List.from(pieces);
         return r;
     }
 
-    bool placePiece(Piece p)
+    // returns a list containing all possible moves in x, y pairs
+    List moves()
     {
-        if(pieces.containsKey(p.position))
-          return false;
-        pieces[p.position] = p;
-        return true;
+
     }
+
+    // returns true if legal to place a piece at x, y)
+    bool placePiece(Piece p, int x, int y)
+    {
+        //if(pieces())
+        return false;
+    }
+
+    int convert(int x, int y) => x*19+y;
 
     void printBoard ()
     {

@@ -1,15 +1,17 @@
 import 'dart:io';
-import 'Piece.dart';
-import 'Point.dart';
 
-class TestPiece extends Piece
+class TestPiece
 {
 
-    TestPiece (String n, int x, int y) : super(n,x,y);
+    enum Color {
+      Black, White
+    }
 
-    void setPosition(int x, int y)
+    Color color;
+
+    Piece(Color c)
     {
-        position = new Point(x,y);
+        color = c;
     }
 
 }
