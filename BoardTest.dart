@@ -19,7 +19,7 @@ class Board
 {
     Map pieces;
     int dimension;
-    // Need to make data storage for board - Make 2D array? or map? or List?
+    // Need to make data storage for board - Make 2D array? or map? or List?, linked hash map?
 
     Board (int dimension)
     {
