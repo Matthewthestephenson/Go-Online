@@ -5,10 +5,10 @@ abstract class Piece
     String type;
     Point position;
 
-    Piece(String n,Point p)
+    Piece(String n, int x, int y)
     {
         type=n;
-        position=p;
+        position=new Point(x,y);
     }
 
     String getPosition()
