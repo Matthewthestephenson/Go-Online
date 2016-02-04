@@ -7,7 +7,9 @@ void main () {
     Board b = new Board(4);
     b.printBoard();
     Board c = b.clone();
-    b.pieces[new Point(3,4)]= new TestPiece("name",3,4);
+    b.placePiece(new TestPiece("white",3,4));
+    var z = b.placePiece(new TestPiece("black",3,4));
+    print("$z");
     b.dimension = 5;
     b.printBoard();
     c.printBoard();
@@ -37,12 +39,15 @@ class Board
 
     bool placePiece(Piece p)
     {
-        //pieces.add();
+        if(pieces.containsKey(p.position))
+          return false;
+        pieces[p.position] = p;
+        return true;
     }
 
     void printBoard ()
     {
-      print("$dimension");
+      print("$dimension x $dimension");
       print("$pieces");
         //TODO
     }
