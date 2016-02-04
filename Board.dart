@@ -11,7 +11,7 @@ abstract class Board
     }
 
     // copy constructor
-    Board (Board oldBoard)
+    Board clone (Board oldBoard)
     {
         //TODO
     }
