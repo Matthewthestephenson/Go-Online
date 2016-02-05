@@ -1,17 +1,30 @@
 import 'dart:io';
 
+enum Color {
+  EMPTY, BLACK, WHITE
+}
+
 class TestPiece
 {
-
-    enum Color {
-      Black, White
-    }
-
     Color color;
 
-    Piece(Color c)
+    TestPiece(Color c)
     {
         color = c;
+    }
+
+    String toString()
+    {
+      switch(color)
+      {
+        case Color.EMPTY:
+          return "+";
+        case Color.BLACK:
+          return "B";
+        case Color.WHITE:
+          return "W";
+      }
+
     }
 
 }
