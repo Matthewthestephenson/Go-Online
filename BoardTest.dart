@@ -9,7 +9,7 @@ void main () {
     b.placePiece(new TestPiece(Color.BLACK),2,3);
     var z = b.placePiece(new TestPiece(Color.WHITE),2,1);
   //  print(b.whatPiece(2,3));
-  //  print("$z");
+    print(new Point(2,3) == (new Point (1,3)));
   //  b.dimension = 5;
     b.printBoard();
     print(b.moves());
@@ -39,29 +39,37 @@ class Board
     // returns a list containing all possible moves in x, y pairs
     List moves()
     {
-      List possible = new List<int>();
+      List possible = new List<Point>();
       for(int i=0;i<dimension*dimension;i++)
       {
         if(pieces[i].color==Color.EMPTY)
-          possible.add(i);
+          possible.add(new Point(convertX(i),convertY(i)));
       }
       return possible;
         //TODO
     }
 
-    // returns true if legal to place a piece at x, y)
+    // returns true if legal to place a piece at (x, y)
     bool placePiece(TestPiece p, int x, int y)
     {
-        if(pieces[convert(x,y)].color!=Color.EMPTY)
+        if(pieces[convertI(x,y)].color!=Color.EMPTY)
           return false;
-        pieces[convert(x,y)] = p;
+        pieces[convertI(x,y)] = p;
         return true;
 
     }
 
+    // returns a string representation of a piece stored at a given xy coordinate
     String whatPiece(int x, int y) => pieces[convert(x,y)].toString();
 
-    int convert(int x, int y) => x*dimension+y;
+    // converts from rectangular coordinates to linear location in List
+    int convertI(int x, int y) => y*dimension+x;
+
+    // converts index in List to x coordinate
+    int convertX(int i) => i%dimension;
+
+    // converts index in List to y coordinate
+    int convertY(int i) => i~/dimension;
 
     // prints a representation of a board
     void printBoard ()
@@ -71,9 +79,10 @@ class Board
       {
         for(var i=0;i<dimension;i++)
         {
-          stdout.write(pieces[convert(i,j)]);
+          stdout.write(pieces[convertI(i,j)]);
         }
         print('');
       }
     }
+
 }

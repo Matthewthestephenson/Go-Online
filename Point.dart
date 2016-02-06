@@ -31,4 +31,13 @@ class Point
     {
         return "($x,$y)";
     }
+
+    bool operator ==(other)
+    {
+      if(other is! Point)
+        return false;
+      Point thisOne = other;
+      return thisOne.x == this.x && thisOne.y == this.y;
+    }
+
 }
