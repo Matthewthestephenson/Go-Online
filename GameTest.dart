@@ -15,7 +15,7 @@ void main () {
         // same as above
   }
 
-  // can use stdin.readLineSync() to read from command line
+  // can use stdin.readLineSync() to read from command line (for testing only)
 }
 
 
@@ -50,14 +50,9 @@ class Game {
     }
   }
 
-  //calculate score (territory) for given color
-  int score(Color c)
-  {
-    return 0;
-  }
 
   // undo function only available in AI play
-  bool undo() {
+  bool undo() { // void instead?
     if (curr == prev)
       return false; // or throw exception?
     curr = prev;
@@ -67,7 +62,7 @@ class Game {
 
   String status()
   {
-    return gameOver ? "Game Over" : "$player to move, White: " + score(WHITE) + " Black: " + score(BLACK);
+    return gameOver ? "Game Over" : "$player to move, White: " + curr.score(WHITE) + " Black: " + curr.score(BLACK);
   }
 
 }
