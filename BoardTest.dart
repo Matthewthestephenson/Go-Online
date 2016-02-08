@@ -2,7 +2,7 @@ import 'dart:io';
 import 'Point.dart';
 import 'TestPiece.dart';
 
-/*void main () {
+void main () {
     Board b = new Board(4);
     //b.printBoard();
     //Board c = b.clone();
@@ -14,7 +14,7 @@ import 'TestPiece.dart';
     b.printBoard();
     print(b.moves(Color.WHITE));
     //c.printBoard();
-}*/
+}
 
 class Board
 {
@@ -59,8 +59,8 @@ class Board
         return true;
     }
 
-    // checks for intersections to clear
-    void checkIntersections(Color c) {
+    // clears intersections for given color
+    void capture(Color c) {
       // TODO
     }
 
