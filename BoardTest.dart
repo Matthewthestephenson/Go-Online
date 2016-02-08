@@ -2,19 +2,19 @@ import 'dart:io';
 import 'Point.dart';
 import 'TestPiece.dart';
 
-void main () {
+/*void main () {
     Board b = new Board(4);
     //b.printBoard();
     //Board c = b.clone();
     b.placePiece(new TestPiece(Color.BLACK),2,3);
     var z = b.placePiece(new TestPiece(Color.WHITE),2,1);
-  //  print(b.whatPiece(2,3));
+    //  print(b.whatPiece(2,3));
     print(new Point(2,3) == (new Point (1,3)));
-  //  b.dimension = 5;
+    //  b.dimension = 5;
     b.printBoard();
-    print(b.moves());
+    print(b.moves(Color.WHITE));
     //c.printBoard();
-}
+}*/
 
 class Board
 {
@@ -37,26 +37,38 @@ class Board
     }
 
     // returns a list containing all possible moves in x, y pairs
-    List moves()
+    List moves(Color c)
     {
       List possible = new List<Point>();
       for(int i=0;i<dimension*dimension;i++)
       {
-        if(pieces[i].color==Color.EMPTY)
+        if(validPlacement(new TestPiece(c),convertX(i),convertY(i)))
           possible.add(new Point(convertX(i),convertY(i)));
       }
       return possible;
         //TODO
     }
 
-    // returns true if legal to place a piece at (x, y)
+    // Attempts to place a piece at (x,y) and returns true if successful
     bool placePiece(TestPiece p, int x, int y)
     {
-        if(pieces[convertI(x,y)].color!=Color.EMPTY)
+        if(!validPlacement(p,x,y))
           return false;
         pieces[convertI(x,y)] = p;
+        // add to moves list
         return true;
+    }
 
+    // checks for intersections to clear
+    void checkIntersections(Color c) {
+      // TODO
+    }
+
+    // returns true if legal to place a piece at (x, y)
+    bool validPlacement(TestPiece p, int x, int y)
+    {
+      //TODO - add move restrictions based on previous plays
+      return pieces[convertI(x,y)].color!=Color.EMPTY;
     }
 
     // returns a string representation of a piece stored at a given xy coordinate
