@@ -1,0 +1,7 @@
+Walsh_Patrick
+<<<<<<< HEAD
+New Text to create problems
+More text to create more problems
+=======
+Text for problems
+>>>>>>> WalshExperiments
