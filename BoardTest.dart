@@ -7,7 +7,7 @@ void main () {
     //b.printBoard();
     //Board c = b.clone();
     b.placePiece(new TestPiece(Color.BLACK),2,3);
-    var z = b.placePiece(new TestPiece(Color.WHITE),2,1);
+    b.placePiece(new TestPiece(Color.WHITE),2,1);
     //  print(b.whatPiece(2,3));
     print(new Point(2,3) == (new Point (1,3)));
     //  b.dimension = 5;
@@ -67,8 +67,7 @@ class Board
     //calculate score (territory) for given color
     int score(Color c)
     {
-
-
+      // TODO - create a list of examined intersections?
       return 0;
     }
 

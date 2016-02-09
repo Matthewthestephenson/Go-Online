@@ -98,6 +98,7 @@ class Game {
   void advancePlayer() {
      player = (player == Color.BLACK ? Color.WHITE : Color.BLACK);
    }
+
   // undo function only available in AI play
   bool undo() { // void instead?
     if (curr == prev)
