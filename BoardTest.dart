@@ -64,15 +64,23 @@ class Board
       // TODO
     }
 
+    //calculate score (territory) for given color
+    int score(Color c)
+    {
+
+
+      return 0;
+    }
+
     // returns true if legal to place a piece at (x, y)
     bool validPlacement(TestPiece p, int x, int y)
     {
       //TODO - add move restrictions based on previous plays
-      return pieces[convertI(x,y)].color!=Color.EMPTY;
+      return pieces[convertI(x,y)].color==Color.EMPTY;
     }
 
     // returns a string representation of a piece stored at a given xy coordinate
-    String whatPiece(int x, int y) => pieces[convert(x,y)].toString();
+    String whatPiece(int x, int y) => pieces[convertI(x,y)].toString();
 
     // converts from rectangular coordinates to linear location in List
     int convertI(int x, int y) => y*dimension+x;
@@ -86,7 +94,7 @@ class Board
     // prints a representation of a board
     void printBoard ()
     {
-      print("$dimension x $dimension");
+  //    print("$dimension x $dimension");
       for(var j=0;j<dimension;j++)
       {
         for(var i=0;i<dimension;i++)

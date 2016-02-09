@@ -1,10 +1,37 @@
 import 'BoardTest.dart';
+import 'TestPiece.dart';
 import 'dart:io';
 
 void main () {
   Game theGame = new Game();
-  while(true)
+  print("Welcome to Go");
+  List<String> xy;
+  while (true)
   {
+      theGame.printBoard();
+      print(theGame.player);
+      print("Press 's' to place a stone and 'p' to pass");
+      // can use stdin.readLineSync() to read from command line (for testing only)
+      String input = stdin.readLineSync();
+      if (input.contains("s"))
+      {
+        do {
+          print("Enter where you want to place the stone (x,y):");
+          String input = stdin.readLineSync();
+          xy = input.split(",").toList();
+          print(theGame.placeStone(int.parse(xy[0]),int.parse(xy[1])));
+        } while (xy.length != 2 && !theGame.placeStone(int.parse(xy[0]),int.parse(xy[1])));
+      }
+      else if (input.contains("p"))
+      {
+        theGame.pass();
+        print("You Passed");
+      }
+      if(theGame.gameOver)
+      {
+        print("Game Over");
+        return;
+      }
       // Black turn
         // display board, give controls
         // read input
@@ -15,15 +42,15 @@ void main () {
         // same as above
   }
 
-  // can use stdin.readLineSync() to read from command line (for testing only)
+
 }
 
 
 class Game {
   Board curr;
-  Board prevB; // previous black turn
-  Board prevW; // previous white turn
+  Board prev; // previous turn
   Color player; // current player color
+  Color human;
   int cumPasses;
   bool gameOver;
 
@@ -32,25 +59,45 @@ class Game {
     player = Color.BLACK;
   }
 
-  //place piece - reset cumul passes
+  Game.single(Color h)
+  {
+    curr = new Board(19);
+    player = Color.BLACK;
+    human = h;
+  }
 
-
-  //pass
-  void pass() {
-    if (++cumPasses == 2)
-      gameOver = true;
-    if (player == Color.BLACK)
+  //place piece - reset cumul passes, add to list of moves (where to store??)
+  bool placeStone(int x, int y)
+  {
+    if (curr.validPlacement(new TestPiece(player),x,y))
     {
-      prevB = curr.clone();
-      player = Color.WHITE;
+      cumPasses = 0;
+      if (player == human)
+      {
+        prev = curr.clone();
+      }
+      curr.placePiece(new TestPiece(player),x,y);
+      advancePlayer();
+      return true;
     }
-    else {
-      prevW = curr.clone();
-      player = Color.BLACK;
+    else
+    {
+      return false;
     }
   }
 
+  //pass - 2 consecutive passes = game over
+  void pass() {
+    if (++cumPasses == 2)
+      gameOver = true;
+    if (player == human)
+      prev = curr.clone();
+    advancePlayer();
+  }
 
+  void advancePlayer() {
+     player = (player == Color.BLACK ? Color.WHITE : Color.BLACK);
+   }
   // undo function only available in AI play
   bool undo() { // void instead?
     if (curr == prev)
@@ -60,9 +107,11 @@ class Game {
     return true;
   }
 
+  void printBoard() => curr.printBoard();
+
   String status()
   {
-    return gameOver ? "Game Over" : "$player to move, White: " + curr.score(WHITE) + " Black: " + curr.score(BLACK);
+    return gameOver ? "Game Over" : "$player to move, White: $curr.score(WHITE), Black: $curr.score(BLACK)";
   }
 
 }
