@@ -6,95 +6,85 @@ import java.util.ArrayList;
 
 
 public class Board {
-		
-	    private Color[][] pieces;
-	    private int dimension;
-	    
-	    public Board (int dimension)
-	    {
-	        pieces = new Color[dimension][dimension];
-	        this.dimension = dimension;
-	        for(int i=0;i<dimension;i++)
-	        	for(int j;j<dimension;j++)
-	        		pieces[i][j]=Color.EMPTY;
-	    }
 
-	    // creates deep copy of the board
-	    public Board clone ()
-	    {
-	        Board r = new Board(dimension);
-//	        r.pieces = ;
-	        return r;
-	    }
+	private Color[][] pieces;
+	private int dimension;
 
-	    // returns a list containing all possible moves in x, y pairs
-	    public ArrayList<Integer> moves(Color c)
-	    {
-	      ArrayList<Integer> possible = new  ArrayList<Integer>();
-	      for(int i=0;i<dimension*dimension;i++)
-	      {
-	        if(validPlacement(c,convertX(i),convertY(i)))
-	          possible.add(new Point(convertX(i),convertY(i)));
-	      }
-	      return possible;
-	        //TODO
-	    }
+	public Board (int dimension)
+	{
+		pieces = new Color[dimension][dimension];
+		this.dimension = dimension;
+		for(int i=0;i<dimension;i++)
+			for(int j = 0;j<dimension;j++)
+				pieces[i][j]=Color.EMPTY;
+	}
 
-	    // Attempts to place a piece at (x,y) and returns true if successful
-	    public boolean placePiece(Color c, int x, int y)
-	    {
-	        if(!validPlacement(p,x,y))
-	          return false;
-	        pieces[convertI(x,y)] = p;
-	        // add to moves list
-	        return true;
-	    }
+	// creates deep copy of the board
+	public Board clone ()
+	{
+		Board r = new Board(dimension);
+		r.pieces = pieces.clone();
+		return r;
+	}
 
-	    // clears intersections for given color
-	    void capture(Color c) {
-	      // TODO
-	    }
+	// returns a list containing all possible moves in x, y pairs
+	public ArrayList<Point> moves(Color c)
+	{
+		ArrayList<Point> possible = new ArrayList<Point>();
+		for(int i=0;i<dimension;i++)
+		{
+			for(int j=0;j<dimension;j++)
+				if(validPlacement(c,i,j))
+					possible.add(new Point(i,j));
+		}
+		return possible;
+		//TODO
+	}
 
-	    //calculate score (territory) for given color
-	    int score(Color c)
-	    {
-	      // TODO - create a list of examined intersections?
-	      return 0;
-	    }
+	// Attempts to place a piece at (x,y) and returns true if successful
+	public boolean placePiece(Color c, int x, int y)
+	{
+		if(!validPlacement(c,x,y))
+			return false;
+		pieces[y][x] = c;
+		// add to moves list
+		return true;
+	}
 
-	    // returns true if legal to place a piece at (x, y)
-	    bool validPlacement(Color p, int x, int y)
-	    {
-	      //TODO - add move restrictions based on previous plays
-	      return pieces[x][y]==Color.EMPTY;
-	    }
+	// clears intersections for given color
+	private void capture(Color c) {
+		// TODO
+	}
 
-	    // returns a string representation of a piece stored at a given xy coordinate
-	    String whatPiece(int x, int y) => pieces[convertI(x,y)].toString();
+	//calculate score (territory) for given color
+	private int score(Color c)
+	{
+		// TODO - create a list of examined intersections?
+		return 0;
+	}
 
-	    // converts from rectangular coordinates to linear location in List
-	    int convertI(int x, int y) => y*dimension+x;
+	// returns true if legal to place a piece at (x, y)
+	public boolean validPlacement(Color p, int x, int y)
+	{
+		//TODO - add move restrictions based on previous plays
+		return pieces[x][y]==Color.EMPTY;
+	}
 
-	    // converts index in List to x coordinate
-	    int convertX(int i) => i%dimension;
+	// returns a string representation of a piece stored at a given xy coordinate
+	//	    String whatPiece(int x, int y) => pieces[convertI(x,y)].toString();
 
-	    // converts index in List to y coordinate
-	    int convertY(int i) => i~/dimension;
-
-	    // prints a representation of a board
-	    void printBoard ()
-	    {
-	  //    print("$dimension x $dimension");
-	      for(var j=0;j<dimension;j++)
-	      {
-	        for(var i=0;i<dimension;i++)
-	        {
-	          stdout.write(pieces[convertI(i,j)]);
-	        }
-	        print('');
-	      }
-	    }
-
+	// prints a representation of a board
+	public void printBoard ()
+	{
+		//    print("$dimension x $dimension");
+		for(int j=0;j<dimension;j++)
+		{
+			for(int i=0;i<dimension;i++)
+			{
+				System.out.print(pieces[j][i].toShortString());
+			}
+			System.out.println();
+		}
 	}
 
 }
