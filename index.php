@@ -52,8 +52,8 @@ removes all 'stones'
 */
 function clearBoard(){
    var row, col;
-   for (row = 0; row < 20; row++){
-      for (col = 0; col < 20; col++){
+   for (row = 0; row < 19; row++){
+      for (col = 0; col < 19; col++){
          getCell(row, col).innerHTML = "";
       }
    }
