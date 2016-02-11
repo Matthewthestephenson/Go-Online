@@ -16,19 +16,22 @@ public class mainGame {
 		{
 			// display board, give controls
 			theGame.printBoard();
-			System.out.println(theGame.player);
-			System.out.println("Press 's' to place a stone and 'p' to pass");
+			System.out.println("\n" + theGame.player + "'s turn\n");
+			System.out.println("Press 's' to place a stone, 'p' to pass, 'f' to forfeit");
 			// read input
 			String input = userInput.nextLine();
 			// s places stone
 			if (input.contains("s"))
 			{
-				do {
-					System.out.println("Enter where you want to place the stone (x,y):");
+				System.out.println("Enter where you want to place the stone (x,y):");
+				input = userInput.nextLine();
+				xy = input.split(",");
+				while (!theGame.placeStone(Integer.parseInt(xy[0]),Integer.parseInt(xy[1])))
+				{
+					System.out.println("Invalid input, try again");
 					input = userInput.nextLine();
 					xy = input.split(",");
-					System.out.println(theGame.placeStone(Integer.parseInt(xy[0]),Integer.parseInt(xy[1])));
-				} while (xy.length != 2 && !theGame.placeStone(Integer.parseInt(xy[0]),Integer.parseInt(xy[1])));
+				}
 			}
 			// p passes
 			else if (input.contains("p"))
@@ -36,9 +39,12 @@ public class mainGame {
 				theGame.pass();
 				System.out.println("You Passed");
 			}
-			if(theGame.gameOver)
+			if(theGame.gameOver || input.contains("f"))
 			{
+				// TODO - add score, determine winner
 				System.out.println("Game Over");
+				if(input.contains("f"))
+					System.out.println(theGame.player.opposite() + " wins");
 				return;
 			}
 		}

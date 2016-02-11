@@ -130,8 +130,8 @@ public class Board {
 	// returns true if legal to place a piece at (x, y)
 	public boolean validPlacement(Color p, int x, int y)
 	{
-		//TODO - add move restrictions based on previous plays (aka Ko Rule)
-		return pieces[y][x]==Color.EMPTY;
+		//TODO - add move restrictions based on previous plays (aka Ko Rule), throw exceptions based on mistake?
+		return onBoard(x,y) && pieces[y][x]==Color.EMPTY;
 	}
 
 	// returns a string representation of a piece stored at a given xy coordinate
@@ -144,7 +144,7 @@ public class Board {
 		{
 			for(int j=0;j<dimension;j++)
 			{
-				System.out.print(pieces[i][j].toShortString());
+				System.out.print(pieces[i][j].toShortString() + " ");
 			}
 			System.out.println();
 		}
