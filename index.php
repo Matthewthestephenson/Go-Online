@@ -5,9 +5,9 @@
    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<table>
+<table id="goBoard">
 <?php
-   $size = 20;
+   $size = 19;
    $cellPadding = 10;
    for ($row = 0; $row < $size; $row++){  // For each row
       echo "<tr>\n";  // Create a new html row

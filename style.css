@@ -1,11 +1,14 @@
 .gridCell{
    width:4vmin;
    height:4vmin;
-   background-color:#ba7;
    text-align:center;
 }
 tr, table, td{
    margin:0;
    padding:0;
    border:0;
+}
+#goBoard{
+   background-image:url("board.png");
+   background-size:contain;
 }
