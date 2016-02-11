@@ -1,8 +1,9 @@
 package experiments;
 
-import java.awt.List;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class Board {
@@ -51,23 +52,86 @@ public class Board {
 		return true;
 	}
 
-	// clears intersections for given color
-	private void capture(Color c) {
-		// TODO
+	// requires piece to be placed at x,y
+	public void remove (int x, int y)
+	{
+		// TODO - clean up algorithm
+		if(pieces[y][x] == Color.EMPTY)
+			throw new IllegalStateException("Can't check for removal on empty intersection");
+		Set<Point> toRemove = new HashSet<Point>();
+		if(capture(pieces[y][x],x,y,toRemove))
+			//remove pieces
+			for(Point p: toRemove)
+				pieces[p.y][p.x] = Color.EMPTY;
+		
+		toRemove = new HashSet<Point>();
+		if(captureRec(pieces[y][x].opposite(),x,y,toRemove) )
+			//remove more pieces
+			for(Point p: toRemove)
+				pieces[p.y][p.x] = Color.EMPTY;
+		
 	}
-
+	
+	// begins recursive calls on neighbors, capturing represents player attempting capture
+	private boolean capture(Color capturing, int x, int y, Set<Point> toRemove)
+	{
+		// TODO - clean up algorithm
+		Set<Point> other = new HashSet<Point>();
+		if(onBoard(x+1,y)&&captureRec(capturing,x+1,y,other))
+			toRemove.addAll(other);	
+		other.clear();
+		if(onBoard(x-1,y)&&captureRec(capturing,x-1,y,other))
+			toRemove.addAll(other);
+		other.clear();
+		if(onBoard(x,y+1)&&captureRec(capturing,x,y+1,other))	
+			toRemove.addAll(other);
+		other.clear();
+		if(onBoard(x,y-1)&&captureRec(capturing,x,y-1,other))
+			toRemove.addAll(other);
+		other.clear();
+		return !toRemove.isEmpty();
+	}
+	
+	
+	// clears intersections for given color
+	private boolean captureRec(Color capturing, int x, int y, Set<Point> toRemove) {
+		// TODO - clean up algorithm
+		if(x>=dimension || x<0 || y>=dimension || y<0)
+			return true;
+		else if(pieces[y][x] == Color.EMPTY)
+			return false;
+		else if(pieces[y][x] == capturing.opposite() && !toRemove.contains(new Point(x,y)))
+		{
+			toRemove.add(new Point(x,y));
+			return captureRec(capturing,x+1,y,toRemove) && captureRec(capturing,x-1,y,toRemove) && captureRec(capturing,x,y+1,toRemove) && captureRec(capturing,x,y-1,toRemove);
+		}
+		else
+			return true;
+	}
+	
+	// returns true if x, y pair is in the range [0, dimension)
+	private boolean onBoard(int x, int y)
+	{
+		return x<dimension && x>=0 && y<dimension && y>=0;
+	}
+	
 	//calculate score (territory) for given color
 	private int score(Color c)
 	{
 		// TODO - create a list of examined intersections?
+
 		return 0;
 	}
 
+	public String currentScore(Color curr) {
+		return score(curr) + " - " + score(curr.opposite());
+	}
+	
 	// returns true if legal to place a piece at (x, y)
 	public boolean validPlacement(Color p, int x, int y)
 	{
-		//TODO - add move restrictions based on previous plays
-		return pieces[x][y]==Color.EMPTY;
+		//TODO - add move restrictions based on previous plays (aka Ko Rule)
+		return pieces[y][x]==Color.EMPTY;
 	}
 
 	// returns a string representation of a piece stored at a given xy coordinate
@@ -76,12 +140,11 @@ public class Board {
 	// prints a representation of a board
 	public void printBoard ()
 	{
-		//    print("$dimension x $dimension");
-		for(int j=0;j<dimension;j++)
+		for(int i=0;i<dimension;i++)
 		{
-			for(int i=0;i<dimension;i++)
+			for(int j=0;j<dimension;j++)
 			{
-				System.out.print(pieces[j][i].toShortString());
+				System.out.print(pieces[i][j].toShortString());
 			}
 			System.out.println();
 		}

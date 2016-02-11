@@ -2,6 +2,7 @@ package experiments;
 
 import java.util.Scanner;
 
+// simulates a game of Go
 public class mainGame {
 
 	public static void main(String[] args)
@@ -13,10 +14,13 @@ public class mainGame {
 		String [] xy;
 		while (true)
 		{
+			// display board, give controls
 			theGame.printBoard();
 			System.out.println(theGame.player);
 			System.out.println("Press 's' to place a stone and 'p' to pass");
+			// read input
 			String input = userInput.nextLine();
+			// s places stone
 			if (input.contains("s"))
 			{
 				do {
@@ -26,6 +30,7 @@ public class mainGame {
 					System.out.println(theGame.placeStone(Integer.parseInt(xy[0]),Integer.parseInt(xy[1])));
 				} while (xy.length != 2 && !theGame.placeStone(Integer.parseInt(xy[0]),Integer.parseInt(xy[1])));
 			}
+			// p passes
 			else if (input.contains("p"))
 			{
 				theGame.pass();
@@ -36,17 +41,6 @@ public class mainGame {
 				System.out.println("Game Over");
 				return;
 			}
-			// Black turn
-			// display board, give controls
-			// read input
-			// complete action, display error if necessary
-			// evaluate territory/score changes, check if game over (if so, break)
-
-			// White turn
-			// same as above
-
-
-
 		}
 	}
 }

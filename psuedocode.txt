@@ -17,7 +17,7 @@ Prevent repetition:
 
 
 
-Territory:
+Territory (score):
   number of tiles occupied + amount of empty spaces surrounded adjacently with board edges and player's pieces
 
 

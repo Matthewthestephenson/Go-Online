@@ -4,7 +4,7 @@ public enum Color
 {
 	EMPTY, BLACK, WHITE;
 
-
+	// for board printing
 	public String toShortString()
 	{
 		switch(this)
@@ -20,6 +20,7 @@ public enum Color
 		}
 	}
 	
+	// for screen display
 	public String toString()
 	{
 		switch(this)
@@ -32,6 +33,22 @@ public enum Color
 			return "White";
 		default:
 			return "";
+		}
+	}
+	
+	// returns other player
+	public Color opposite()
+	{
+		switch(this)
+		{
+		case EMPTY:
+			return Color.EMPTY;
+		case BLACK:
+			return Color.WHITE;
+		case WHITE:
+			return Color.BLACK;
+		default:
+			return Color.EMPTY;
 		}
 	}
 }
