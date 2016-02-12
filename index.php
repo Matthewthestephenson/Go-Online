@@ -41,6 +41,7 @@ function cellClick(row, col){
    var colors = ['white', 'black'];
    if(cell.innerHTML == ""){
       cell.style.color = colors[turn];
+      cell.style.backgroundImage = "url(" + colors[turn] + "Stone.png)";
       cell.innerHTML = "O";
       turn = 1 - turn;
    }
@@ -51,10 +52,12 @@ Iterates through all cells on the board and
 removes all 'stones'
 */
 function clearBoard(){
-   var row, col;
+   var row, col, cell;
    for (row = 0; row < 19; row++){
       for (col = 0; col < 19; col++){
-         getCell(row, col).innerHTML = "";
+         cell = getCell(row, col);
+         cell.style.backgroundImage = "none";
+         cell.innerHTML = "";
       }
    }
 }
