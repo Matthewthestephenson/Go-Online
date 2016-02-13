@@ -2,11 +2,13 @@
    width:4vmin;
    height:4vmin;
    text-align:center;
+   background-image:none;
 }
 tr, table, td{
    margin:0;
    padding:0;
    border:0;
+   background-size:contain;
 }
 #goBoard{
    background-image:url("board.png");
