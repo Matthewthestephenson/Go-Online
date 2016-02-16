@@ -30,6 +30,19 @@
       Input
    </button>
 </p>
+<h4>
+   Info about JSON string:
+</h4>
+<p>
+   To place a piece on the board, the input json string
+   is
+   <br />
+   {"playerID":0, "action":2, "details":{"row":1, "col":2}}
+   <br />
+   The playerID can be any number for this test.
+   <br />
+   The row and column values can be changed to anything from 0 to 18 in this example
+</p>
 <script type="text/javascript" src="script.js">
 </script>
 </body>
