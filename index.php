@@ -13,54 +13,24 @@
       echo "<tr>\n";  // Create a new html row
       for ($col = 0; $col < $size; $col++){  // For each column in the row
          $id = "r" . $row . "c" . $col;   // Formulate the cell's id
-         echo "\t<td class='gridCell' id='" . $id . "' onclick='cellClick(" . $row . "," . $col . ")'></td>\n";  // Create a new html cell
+         echo "\t<td class='gridCell' id='" . $id . "' onclick='requestPlace(" . $row . "," . $col . ")'></td>\n";  // Create a new html cell
       }
       echo "</tr>\n";  // Close the row tag
    }
 ?>
 </table>
-<button onclick="clearBoard()">Clear Board</button>
-<script>
-var turn = 0;
-
-/*
-Returns the id of the html cell at the given row and column
-*/
-function getCell(row, col){
-   return document.getElementById("r" + row + "c" + col);
-}
-
-/*
-Calls getCell() to get the cell to modify
-Changes the contents of the cell to the 
-letter 'O' if the cell was previously empty
-Alternates colors
-*/
-function cellClick(row, col){
-   var cell = getCell(row, col);
-   var colors = ['white', 'black'];
-   if(cell.innerHTML == ""){
-      cell.style.color = colors[turn];
-      cell.style.backgroundImage = "url(" + colors[turn] + "Stone.png)";
-      cell.innerHTML = "O";
-      turn = 1 - turn;
-   }
-}
-
-/*
-Iterates through all cells on the board and
-removes all 'stones'
-*/
-function clearBoard(){
-   var row, col, cell;
-   for (row = 0; row < 19; row++){
-      for (col = 0; col < 19; col++){
-         cell = getCell(row, col);
-         cell.style.backgroundImage = "none";
-         cell.innerHTML = "";
-      }
-   }
-}
+<button onclick="requestClear()">Clear Board</button>
+<p>
+   <b>Json String to be sent:</b>
+   <span id="jsonOutput"></span>
+</p>
+<p>
+   <input id="jsonInput"></input>
+   <button onclick="parseInput(document.getElementById('jsonInput').value)">
+      Input
+   </button>
+</p>
+<script type="text/javascript" src="script.js">
 </script>
 </body>
 </html>
