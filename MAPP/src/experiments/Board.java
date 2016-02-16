@@ -65,7 +65,7 @@ public class Board {
 				pieces[p.y][p.x] = Color.EMPTY;
 		
 		toRemove = new HashSet<Point>();
-		if(captureRec(pieces[y][x].opposite(),x,y,toRemove) )
+		if(captureRec(pieces[y][x].opposite(),x,y,toRemove))
 			//remove more pieces
 			for(Point p: toRemove)
 				pieces[p.y][p.x] = Color.EMPTY;
@@ -103,7 +103,10 @@ public class Board {
 		else if(pieces[y][x] == capturing.opposite() && !toRemove.contains(new Point(x,y)))
 		{
 			toRemove.add(new Point(x,y));
-			return captureRec(capturing,x+1,y,toRemove) && captureRec(capturing,x-1,y,toRemove) && captureRec(capturing,x,y+1,toRemove) && captureRec(capturing,x,y-1,toRemove);
+			return  captureRec(capturing,x+1,y,toRemove) && 
+					captureRec(capturing,x-1,y,toRemove) && 
+					captureRec(capturing,x,y+1,toRemove) && 
+					captureRec(capturing,x,y-1,toRemove);
 		}
 		else
 			return true;
