@@ -2,7 +2,7 @@
 <html>
 <head>
    <title>PHP test</title>
-   <link rel="stylesheet" type="text/css" href="style.css">
+   <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <table id="goBoard">
@@ -43,9 +43,9 @@
    <br />
    The row and column values can be changed to anything from 0 to 18 in this example
 </p>
-<script type="text/javascript" src="network.js">
+<script type="text/javascript" src="/js/network.js">
 </script>
-<script type="text/javascript" src="script.js">
+<script type="text/javascript" src="/js/script.js">
 </script>
 </body>
 </html>
