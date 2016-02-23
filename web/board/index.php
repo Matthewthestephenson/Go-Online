@@ -2,7 +2,7 @@
 <html>
 <head>
    <title>PHP test</title>
-   <link rel="stylesheet" type="text/css" href="/css/style.css">
+   <link rel="stylesheet" type="text/css" href="/css/board.css">
 </head>
 <body>
 <table id="goBoard">
