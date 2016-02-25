@@ -1,0 +1,17 @@
+#header
+{
+   width: 100vw;
+   height: 6vh;
+   background-color: #c92;
+   padding: 0.5vh;
+}
+
+#logo
+{
+   font-size: 5vh;
+}
+
+#profileIcon
+{
+   float: right;
+}

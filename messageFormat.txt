@@ -1,0 +1,11 @@
+Messages will be sent as JSON strings, which can be interpreted as javascript objects. Every message will have the same top-level layout, as follows:
+
+{
+"playerID" : /*int representing player*/,
+"action" : /*int representing action*/,
+"details" : {/*object type depends on action*/}
+}
+
+   The playerID will be unique integer value associated with either the player's login or the guest session if they aren't logged in.
+   The action will be a code for any of the possible actions a player can take, such as creating a game, placing a stone in-game, forfeiting, etc.
+   The details name will be paired with an object whose contents depend on the action taken. For example, if the action was creating a game, the object might include information regarding the opponent (another player or AI), the game timer, the game password if set, and other options from the create game screen. 
