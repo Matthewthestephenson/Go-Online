@@ -1,0 +1,26 @@
+Removal rules:
+
+  when a piece is placed, check all 4 adjacent squares
+    //check opponent's pieces for capture
+    initialize static/instance var list
+    check a piece's neighbors:
+      if a free space, return
+      if a player's piece or in list, continue
+      if opponent's piece, add to list, recursively call this on that cell
+
+      //check current's pieces for capture
+      call same function on current player
+
+
+
+Prevent repetition:
+
+
+
+Territory (score):
+  number of tiles occupied + amount of empty spaces surrounded adjacently with board edges and player's pieces
+
+
+-------
+
+Server mediation:
