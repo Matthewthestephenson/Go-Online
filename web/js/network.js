@@ -14,25 +14,11 @@ function makeString(id, act, det){
    return objString;
 }
 
+
 /*
 Sends a string to the server
 Currently unimplemented
 */
 function sendString(objString){
    document.getElementById('jsonOutput').innerHTML = objString;
-}
-
-/*
-Parses the input JSON string
-*/
-function parseInput(inputString){
-   var inputObject = JSON.parse(inputString);
-   switch(inputObject.action){
-   case 2:
-      placePiece(inputObject.details.row, inputObject.details.col);
-      break;
-   default:
-      alert("invalid action number");
-      break;
-   }
 }

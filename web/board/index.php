@@ -19,7 +19,7 @@
    }
 ?>
 </table>
-<button onclick="requestClear()">Clear Board</button>
+<button onclick="clearBoard()">Clear Board</button>
 <p>
    <b>Json String to be sent:</b>
    <span id="jsonOutput"></span>
@@ -45,7 +45,9 @@
 </p>
 <script type="text/javascript" src="/js/network.js">
 </script>
-<script type="text/javascript" src="/js/script.js">
+<script type="text/javascript" src="/js/parseInput.js">
+</script>
+<script type="text/javascript" src="/js/board.js">
 </script>
 </body>
 </html>
